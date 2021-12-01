@@ -1,5 +1,4 @@
 # MultiMedia Course
-Thie Repository for multi media course 2021
 
 Compare coding efficiency of various video compression standards
 ------
@@ -48,6 +47,10 @@ Then take the result and put in the table , table below show the result with 10 
 | 50 | 276.16      | 26.943 |
   </td></tr>
   </table>
+ And this curve explains the relationship between PSNR and bitRate
+
+ ![image](https://user-images.githubusercontent.com/68567544/144230097-4ef88688-1eae-44a6-8a37-7c5a5729b30e.png)
+
 
 > As we see when the QP increases the PSNR will decrease and the rate also decrease which mean the resolution of video will decrease
 
@@ -90,4 +93,10 @@ Tables below shown the results :
 | 50 | 80.27       | 27.65  |
   </td></tr>
   </table>
+  
+And this curve explains the relationship between PSNR and bitRate
+   
+![image](https://user-images.githubusercontent.com/68567544/144230333-c332a94d-5f37-46ec-ae4f-cee451c53002.png)
+
+
 
