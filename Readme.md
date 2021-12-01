@@ -281,5 +281,83 @@ The same steps were applied to another 10-second video, and the results were as 
   
   ![image](https://user-images.githubusercontent.com/68567544/144234345-0efa96bb-18a7-4896-8adf-ce976f909181.png)
 
+Finally the Motion , the range of motion is between **{0-32768}** and to get better results take the value **57** or the multiples so i take these values **{47,114,171}**
+and use this command to got the result : 
 
+`ffmpeg -benchmark -i  {Input_Viedo}.mp4 -c:v libx265 -x265-params merange={Values_of_motion} -qp {Values_of_QP} {Output_Viedo}.mp4 -psnr`
+
+After applying the command, I got the results in the tables below : 
+
+<table>
+<tr><th>Motion 57</th><th>Motion 114</th><th>Motion 171</th></tr>
+<tr><td>
   
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 92.96 | 20539.29    | 51.219 |
+| 20 | 79.07 | 6511.73     | 45.517 |
+| 30 | 62.26 | 2078.23     | 39.199 |
+| 40 | 44.24 | 485.96      | 33.021 |
+| 50 | 31.63 | 80.27       | 27.65  |
+</td><td>
+ 
+| QP | Time   | Rate (Kb/s) | PSNR   |
+|----|--------|-------------|--------|
+| 10 | 105.81 | 20547.05    | 51.219 |
+| 20 | 85.29  | 6511.74     | 45.516 |
+| 30 | 61.88  | 2078.34     | 39.206 |
+| 40 | 38.68  | 486.59      | 33.018 |
+| 50 | 29.12  | 80.63       | 27.646 |
+  </td><td>
+
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 84.14 | 20545       | 51.219 |
+| 20 | 69.27 | 6512.95     | 45.515 |
+| 30 | 52.3  | 2077.71     | 39.202 |
+| 40 | 36.19 | 485.56      | 33.019 |
+| 50 | 25.34 | 80.42       | 27.653 |
+  </td></tr>
+  </table>
+  
+ This curve shows the relationship between the PSNR and the bit rate of the tables above
+ 
+ ![image](https://user-images.githubusercontent.com/68567544/144235251-ce52b764-7695-4832-b582-484a25527ef5.png)
+
+The same steps were applied to another 10-second video, and the results were as follows : 
+
+<table>
+<tr><th>Motion 57</th><th>Motion 114</th><th>Motion 171</th></tr>
+<tr><td>
+  
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 18.44 | 349.69      | 63.34  |
+| 20 | 26.6  | 168.69      | 54.996 |
+| 30 | 27.56 | 75.11       | 48.538 |
+| 40 | 25.01 | 36.62       | 42.253 |
+| 50 | 19.66 | 24.75       | 35.836 |
+</td><td>
+ 
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 41.72 | 349.21      | 63.35  |
+| 20 | 41.05 | 168.33      | 55.006 |
+| 30 | 41.95 | 74.32       | 48.53  |
+| 40 | 38.23 | 36.17       | 42.255 |
+| 50 | 34.09 | 24.6        | 35.791 |
+  </td><td>
+
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 41.08 | 350.11      | 63.354 |
+| 20 | 48.62 | 168.09      | 55.005 |
+| 30 | 48.52 | 73.93       | 48.526 |
+| 40 | 43.95 | 35.97       | 42.249 |
+| 50 | 38.31 | 24.46       | 35.861 |
+  </td></tr>
+  </table>
+This curve shows the relationship between the PSNR and the bit rate of the tables above
+
+![image](https://user-images.githubusercontent.com/68567544/144235565-06c25346-8e3f-49c8-8480-cf158d1c1cbc.png)
+
