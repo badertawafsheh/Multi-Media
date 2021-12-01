@@ -98,5 +98,188 @@ And this curve explains the relationship between PSNR and bitRate
    
 ![image](https://user-images.githubusercontent.com/68567544/144230333-c332a94d-5f37-46ec-ae4f-cee451c53002.png)
 
+Correlate the relation between video coding complexity and coding efficiency 
+------
+
+Observe the transcoding time, PSNR, and compressed video size for the following cases:
+1. Vary Maximum CU size
+2. Vary Maximum partitioning depth
+3. Vary Motion estimation search range 
+
+At first the maximum CU the range of the values for CU is **{16 ,32 ,64}**  and i used this command to do it : 
+
+` ffmpeg -benchmark -i {Input_Viedo}.mp4 -c:v libx265 -x265-params ctu={Values_of_CU} -qp {Values_of_QP} {Output_Viedo}.mp4 -psnr `
+
+After applying the command, I got the results in the tables below : 
+<table>
+<tr><th>CU 16</th><th>CU 32</th><th>CU 64</th></tr>
+<tr><td>
+  
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 82.71 | 21078.7     | 51.282 |
+| 20 | 68.92 | 6589.37     | 45.315 |
+| 30 | 51.7  | 2198.89     | 38.875 |
+| 40 | 39.11 | 631.93      | 32.431 |
+| 50 | 34.48 | 210.5       | 27.163 |
+</td><td>
+
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 74.88 | 20579.04    | 51.297 |
+| 20 | 62.82 | 6491.08     | 45.546 |
+| 30 | 48.11 | 2082.98     | 39.06  |
+| 40 | 34.66 | 510.78      | 32.738 |
+| 50 | 28.78 | 111.85      | 27.33  |
+  </td><td>
+
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 88.78 | 20539.29    | 51.219 |
+| 20 | 84.14 | 6511.73     | 45.517 |
+| 30 | 58.44 | 2078.23     | 39.199 |
+| 40 | 38.07 | 485.96      | 33.021 |
+| 50 | 30.06 | 80.27       | 27.65  |
+  </td></tr>
+  </table>
+ This curve shows the relationship between the PSNR and the bit rate of the tables above
+ 
+ ![image](https://user-images.githubusercontent.com/68567544/144232527-40d55d0e-ab3e-4377-9d4c-5cd1fbd7109e.png)
+ 
+The same steps were applied to another 10-second video, and the results were as follows : 
+
+<table>
+<tr><th>CU 16</th><th>CU 32</th><th>CU 64</th></tr>
+<tr><td>
+  
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 13.04 | 456.63      | 63.43  |
+| 20 | 16.32 | 260.38      | 54.607 |
+| 30 | 17.93 | 160.31      | 47.716 |
+| 40 | 19.38 | 121.98      | 41.324 |
+| 50 | 14.78 | 108.74      | 34.666 |
+</td><td>
+
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 18.62 | 379.12      | 63.4   |
+| 20 | 27.59 | 191.91      | 55.004 |
+| 30 | 28.41 | 92.16       | 48.194 |
+| 40 | 25.49 | 53.61       | 41.927 |
+| 50 | 22.12 | 41.79       | 35.818 |
+  </td><td>
+
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 19.76 | 349.69      | 63.34  |
+| 20 | 25.51 | 168.69      | 54.996 |
+| 30 | 26.59 | 75.11       | 48.538 |
+| 40 | 24.43 | 36.62       | 42.253 |
+| 50 | 21.29 | 24.75       | 35.836 |
+  </td></tr>
+  </table>
+This curve shows the relationship between the PSNR and the bit rate of the tables above
+
+![image](https://user-images.githubusercontent.com/68567544/144232873-2da12b5a-97cf-449c-9dbf-7ac28ba60423.png)
+
+ 
+Now partitioning depth , The range of values of dpth is **{1,2,3,4}** and this command was applied to get the results : 
+
+`ffmpeg -benchmark -i  {Input_Viedo}.mp4 -c:v libx265 -x265-params tu-inter-depth={Depth}:tu-intra-depth={Depth} -qp {Value_of_QP} {Output_Viedo}.mp4 -psnr`
+
+After applying the command, I got the results in the tables below : 
+
+<table>
+<tr><th>Depth 1</th><th>Depth 2</th><th>Depth 3</th><th>Depth 4</th></tr>
+<tr><td>
+  
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 84.66 | 20539.29    | 51.219 |
+| 20 | 70.62 | 6511.73     | 45.517 |
+| 30 | 54.24 | 2078.23     | 39.199 |
+| 40 | 37.08 | 485.96      | 33.021 |
+| 50 | 27.6  | 80.27       | 27.65  |
+</td><td>
+
+| QP | Time   | Rate (Kb/s) | PSNR   |
+|----|--------|-------------|--------|
+| 10 | 119.13 | 20099.44    | 51.372 |
+| 20 | 93.75  | 6281.23     | 45.745 |
+| 30 | 64.08  | 2133.11     | 39.525 |
+| 40 | 41.31  | 513.75      | 33.199 |
+| 50 | 25.75  | 81.3        | 27.633 |
+  </td><td>
+
+| QP | Time   | Rate (Kb/s) | PSNR   |
+|----|--------|-------------|--------|
+| 10 | 119.78 | 20020.98    | 51.356 |
+| 20 | 94.12  | 6218.88     | 45.699 |
+| 30 | 69.3   | 2094.58     | 39.352 |
+| 40 | 44.45  | 497.68      | 32.688 |
+| 50 | 26.75  | 81.16       | 27.571 |
+  </td><td>
+ 
+| QP | Time   | Rate (Kb/s) | PSNR   |
+|----|--------|-------------|--------|
+| 10 | 169.23 | 19950.4     | 51.346 |
+| 20 | 136.93 | 6181.08     | 45.658 |
+| 30 | 99.53  | 2060.4      | 39.115 |
+| 40 | 60.28  | 463.29      | 31.856 |
+| 50 | 41.55  | 81.11       | 27.449 |
+  </td></tr>
+  </table>
+This curve shows the relationship between the PSNR and the bit rate of the tables above
+
+![image](https://user-images.githubusercontent.com/68567544/144234060-38ec6cac-fd73-46fc-8e54-96431d230309.png)
+
+The same steps were applied to another 10-second video, and the results were as follows : 
+
+<table>
+<tr><th>Depth 1</th><th>Depth 2</th><th>Depth 3</th><th>Depth 4</th></tr>
+<tr><td>
+  
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 19.99 | 349.69      | 63.34  |
+| 20 | 28.29 | 168.69      | 54.996 |
+| 30 | 28.26 | 75.11       | 48.538 |
+| 40 | 27.24 | 36.62       | 42.253 |
+| 50 | 23.34 | 24.75       | 35.836 |
+</td><td>
+ 
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 24.56 | 338.45      | 63.755 |
+| 20 | 29.58 | 167.04      | 55.323 |
+| 30 | 32.18 | 74.06       | 48.691 |
+| 40 | 29.69 | 36.64       | 42.394 |
+| 50 | 24.21 | 24.89       | 35.964 |
+  </td><td>
+
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 30.54 | 341.03      | 63.811 |
+| 20 | 34.28 | 168.78      | 55.44  |
+| 30 | 34.83 | 73.78       | 48.736 |
+| 40 | 30.47 | 36.46       | 42.518 |
+| 50 | 27.48 | 24.58       | 35.951 |
+  </td><td>
+ 
+| QP | Time  | Rate (Kb/s) | PSNR   |
+|----|-------|-------------|--------|
+| 10 | 38.42 | 340.92      | 63.828 |
+| 20 | 45.29 | 168.34      | 55.365 |
+| 30 | 44.73 | 73.42       | 48.753 |
+| 40 | 43.89 | 36.49       | 42.531 |
+| 50 | 37.79 | 24.64       | 35.898 |
+  </td></tr>
+  </table>
+  
+  This curve shows the relationship between the PSNR and the bit rate of the tables above
+  
+  ![image](https://user-images.githubusercontent.com/68567544/144234345-0efa96bb-18a7-4896-8adf-ce976f909181.png)
 
 
+  
